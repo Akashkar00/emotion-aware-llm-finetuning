@@ -69,28 +69,41 @@ Findings that carry forward and matter for every remaining phase:
 
 ## How to resume on Colab
 
-1. Push this repo to GitHub (or upload the folder), `git clone` it in a
-   Colab notebook. `git init` already ran locally; commits exist through
-   Phase 3 plus the Phase 4 harness — check `git log` for exact state.
-2. In the first Colab cell:
+Repo is live at **https://github.com/Akashkar00/emotion-aware-llm-finetuning**
+(public). Steps below are literal Colab notebook cells.
+
+0. Open [colab.research.google.com](https://colab.research.google.com) → New
+   notebook → **Runtime → Change runtime type → T4 GPU** (free tier is
+   enough for Phase 4; Phases 6–8 may want more VRAM/A100 if available).
+
+1. Clone the repo:
+   ```python
+   !git clone https://github.com/Akashkar00/emotion-aware-llm-finetuning.git
+   %cd emotion-aware-llm-finetuning
    ```
+2. Verify the GPU is actually attached before installing anything (catches
+   a forgotten runtime-type change early):
+   ```python
+   !nvidia-smi
+   ```
+3. Install dependencies:
+   ```python
    !pip install -r requirements.txt
    ```
    `requirements.txt` was exported from the local `uv.lock` via
    `uv export --no-hashes --no-dev -o requirements.txt` — it pins the same
    versions verified locally (transformers 5.15.0, accelerate 1.14.0, etc.),
-   so `torch==2.13.0` will resolve to a CUDA-enabled Linux wheel
-   automatically on Colab's GPU runtime (Runtime → Change runtime type →
-   GPU, before installing).
-3. Regenerate the tokenized data (not committed — it's derived, git-ignored
+   so `torch==2.13.0` resolves to a CUDA-enabled Linux wheel automatically
+   on Colab.
+4. Regenerate the tokenized data (not committed — it's derived, git-ignored
    by design):
-   ```
+   ```python
    !python scripts/run_pipeline.py
    ```
-4. Run all three baselines — sequentially is fine on a single Colab GPU for
+5. Run all three baselines — sequentially is fine on a single Colab GPU for
    the same reason it had to be sequential locally (shared device), but a
    Colab GPU will be dramatically faster per run than the M1 was:
-   ```
+   ```python
    !python scripts/train_baseline.py --model_name bert-base-uncased
    !python scripts/train_baseline.py --model_name roberta-base
    !python scripts/train_baseline.py --model_name microsoft/deberta-v3-base
@@ -99,11 +112,31 @@ Findings that carry forward and matter for every remaining phase:
    (Colab GPUs have far more than 8GB) if you want faster iteration; a T4
    (16GB) should comfortably handle batch 32–64 for these model sizes at
    `max_length=64`.
-5. Results land in `results/phase4_baselines/<model>/metrics.json`. Pull
-   those back down (or keep working in Colab / Drive-mounted storage) to
-   write up `docs/phase4_baseline_experiments.md` — the comparison table,
-   strongest-baseline identification, and per-class discussion the phase
-   plan calls for.
+6. Results land in `results/phase4_baselines/<model>/metrics.json`. **Bring
+   them back to this machine rather than pushing from Colab** — keeps git
+   authorship consistent (this local machine's `git config` is already set
+   to `Akashkar00 <karakash828@gmail.com>`; setting up equivalent auth
+   inside a throwaway Colab runtime is extra setup for no benefit). Easiest
+   path:
+   ```python
+   from google.colab import files
+   import shutil
+   shutil.make_archive("phase4_results", "zip", "results/phase4_baselines")
+   files.download("phase4_results.zip")
+   ```
+   Unzip that into `results/phase4_baselines/` in the local repo, then say
+   so — from there the Phase 4 comparison table and
+   `docs/phase4_baseline_experiments.md` get written and committed locally,
+   same as Phases 1–3.
+7. Colab runtimes are ephemeral — everything not downloaded (or saved to a
+   mounted Drive) is lost when the runtime disconnects/recycles. For
+   anything that takes a while (Phase 8's sweep especially), mount Drive
+   first and point `--output_dir`-style paths there if you don't want to
+   babysit the session:
+   ```python
+   from google.colab import drive
+   drive.mount("/content/drive")
+   ```
 
 ## What's left (Phases 4 finish through 12)
 
