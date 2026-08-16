@@ -4,11 +4,11 @@ Research-grade project demonstrating LoRA / QLoRA fine-tuning of open LLMs
 for multi-label emotion classification on GoEmotions, benchmarked against
 encoder-only baselines (BERT, RoBERTa, DeBERTa-v3).
 
-Status: Phase 1 (Research & Planning) complete. See `docs/` for phase reports.
+Status: Phase 2 (Dataset Deep Dive) complete. See `docs/` for phase reports.
 
 ## Phases
 - [x] Phase 1 — Research & Planning
-- [ ] Phase 2 — Dataset Deep Dive (EDA)
+- [x] Phase 2 — Dataset Deep Dive (EDA)
 - [ ] Phase 3 — Data Engineering Pipeline
 - [ ] Phase 4 — Baseline Experiments
 - [ ] Phase 5 — Instruction Dataset Creation

@@ -1,0 +1,113 @@
+{
+  "split_sizes": {
+    "train": 43410,
+    "validation": 5426,
+    "test": 5427
+  },
+  "n_labels": 28,
+  "label_names": [
+    "admiration",
+    "amusement",
+    "anger",
+    "annoyance",
+    "approval",
+    "caring",
+    "confusion",
+    "curiosity",
+    "desire",
+    "disappointment",
+    "disapproval",
+    "disgust",
+    "embarrassment",
+    "excitement",
+    "fear",
+    "gratitude",
+    "grief",
+    "joy",
+    "love",
+    "nervousness",
+    "optimism",
+    "pride",
+    "realization",
+    "relief",
+    "remorse",
+    "sadness",
+    "surprise",
+    "neutral"
+  ],
+  "most_common_label": {
+    "label": "neutral",
+    "count": 14219
+  },
+  "rarest_label": {
+    "label": "grief",
+    "count": 77
+  },
+  "imbalance_ratio": 184.7,
+  "mean_labels_per_example": 1.176,
+  "labels_per_example_pct": {
+    "1": 83.75,
+    "2": 14.97,
+    "3": 1.21,
+    "4": 0.07,
+    "5": 0.0
+  },
+  "top_correlated_pairs": [
+    {
+      "label_a": "fear",
+      "label_b": "nervousness",
+      "correlation": 0.10143077071104095
+    },
+    {
+      "label_a": "anger",
+      "label_b": "annoyance",
+      "correlation": 0.1006563461101111
+    },
+    {
+      "label_a": "confusion",
+      "label_b": "curiosity",
+      "correlation": 0.08254939905878711
+    },
+    {
+      "label_a": "disappointment",
+      "label_b": "sadness",
+      "correlation": 0.07426779696445293
+    },
+    {
+      "label_a": "grief",
+      "label_b": "sadness",
+      "correlation": 0.06721753709508296
+    },
+    {
+      "label_a": "excitement",
+      "label_b": "joy",
+      "correlation": 0.05499821779853035
+    },
+    {
+      "label_a": "remorse",
+      "label_b": "sadness",
+      "correlation": 0.04993829186856289
+    },
+    {
+      "label_a": "desire",
+      "label_b": "optimism",
+      "correlation": 0.041467384140879
+    },
+    {
+      "label_a": "caring",
+      "label_b": "optimism",
+      "correlation": 0.03501232763613748
+    },
+    {
+      "label_a": "annoyance",
+      "label_b": "disapproval",
+      "correlation": 0.027965541064184148
+    }
+  ],
+  "word_count_stats": {
+    "mean": 12.8,
+    "median": 12.0,
+    "p95": 24.0,
+    "max": 33
+  }
+}
