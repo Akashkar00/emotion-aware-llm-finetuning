@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/
+outputs/
+checkpoints/
+*.ckpt
+*.bin
+*.safetensors
+wandb/
+.env
