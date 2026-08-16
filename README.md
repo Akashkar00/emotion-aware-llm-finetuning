@@ -4,15 +4,21 @@ Research-grade project demonstrating LoRA / QLoRA fine-tuning of open LLMs
 for multi-label emotion classification on GoEmotions, benchmarked against
 encoder-only baselines (BERT, RoBERTa, DeBERTa-v3).
 
-Status: Phase 3 (Data Engineering Pipeline) complete. See `docs/` for phase reports.
+Status: Phases 1–3 complete locally. Phase 4 onward (GPU training) moves to
+Google Colab — see **[docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md)** for
+exactly what's done and how to resume. See `docs/` for phase reports.
 
-## Setup
+## Setup (local — data work only, Phases 1–3)
 
 ```bash
 uv sync
 uv run pytest tests/ -v          # 9 tests, ~9s (2 require network)
 uv run python scripts/run_pipeline.py   # regenerate data/processed/
 ```
+
+## Setup (Colab — Phase 4 onward)
+
+See [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md#how-to-resume-on-colab).
 
 ## Phases
 - [x] Phase 1 — Research & Planning
